@@ -34,8 +34,10 @@ class MainActivity : AppCompatActivity() {
 //    Con este metodo podemos usar la barra del menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+
         val itemSearch = menu?.findItem(R.id.search)
-        val viewSearch = itemSearch?.actionView as SearchView
+        val viewSearch = itemSearch?.actionView as androidx.appcompat.widget.SearchView
+
         // Así se van a ver el hint en la barra de buscar
         viewSearch.queryHint = "Type your name"
         viewSearch.setOnQueryTextFocusChangeListener { v, hasFocus ->
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     // COn estos métodos se va tomando el texto que el usuario ecribe
-        viewSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        viewSearch.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
 
             // Lo que se va escribiendo en la casilla
             override fun onQueryTextChange(newText: String?): Boolean {
