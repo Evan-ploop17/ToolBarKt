@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LearningToolBar</string>
+    <string name="tittle_fav">Favorito</string>
+    <string name="title_backup">Back Up</string>
+</resources>
