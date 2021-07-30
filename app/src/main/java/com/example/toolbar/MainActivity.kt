@@ -9,7 +9,9 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.ShareActionProvider
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.MenuItemCompat
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,12 +33,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    Con este metodo podemos usar la barra del menu
+    // Con este metodo podemos usar la barra del menu
+    // acá va toda la configuración de los elementos de la toolbar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
 
         val itemSearch = menu?.findItem(R.id.search)
         val viewSearch = itemSearch?.actionView as androidx.appcompat.widget.SearchView
+
+        // Con las 3 lineas podemos sacar las opciones de compartir en diferentes aplicaciones
+        val itemShare = menu?.findItem(R.id.share)
+        val shareActionProvider = MenuItemCompat.getActionProvider(itemShare) as ShareActionProvider
+        shareIntent(shareActionProvider)
 
         // Así se van a ver el hint en la barra de buscar
         viewSearch.queryHint = "Type your name"
@@ -72,5 +80,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun shareIntent(shareActionProvider: ShareActionProvider){
+        shareActionProvider!!
+        var intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, "Este es un mensaje compartido ")
+        shareActionProvider.setShareIntent(intent)
     }
 }
